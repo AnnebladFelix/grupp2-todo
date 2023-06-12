@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue, set, push } from "firebase/database";
+import { getDatabase, ref, onValue, set, push, get } from "firebase/database";
 
 const rootDiv = document.getElementById("root");
 
@@ -22,10 +22,6 @@ onValue(postsRef, (snapshot) => {
   const data = snapshot.val();
 
   printTodosList(data);
-
-  console.log(data);
-  console.log(data.todo);
-  console.log(data.todo.id);
 });
 
 // ==== Print every todo === //
@@ -41,7 +37,7 @@ function printTodosList(data) {
 
     const checkBox = document.createElement("input");
     checkBox.setAttribute("type", "checkbox");
-    checkBox.setAttribute("id", "todo-checkbox");
+    checkBox.setAttribute("class", "todo-checkbox");
 
     const todoTitle = document.createElement("h3");
     todoTitle.innerText = todo.title;
@@ -52,10 +48,7 @@ function printTodosList(data) {
     const todoDate = document.createElement("p");
     todoDate.innerText = todo.dueDate;
 
-    const todoTime = document.createElement("p");
-    todoTime.innerText = todo.dueTime;
-
-    todoBox.append(checkBox, todoTitle, todoDesc, todoDate, todoTime);
+    todoBox.append(checkBox, todoTitle, todoDesc, todoDate);
 
     todosWrapper.appendChild(todoBox);
   });
@@ -75,7 +68,7 @@ showFormBtn.addEventListener("click", () => {
   titleInputLabel.setAttribute("for", "titleInput");
 
   const titleInput = document.createElement("input");
-  titleInput.id = "titleInput";
+  titleInput.className = "titleInput";
   titleInput.type = "text";
 
   const descInputLabel = document.createElement("label");
@@ -83,7 +76,7 @@ showFormBtn.addEventListener("click", () => {
   descInputLabel.setAttribute("for", "descInput");
 
   const descInput = document.createElement("input");
-  descInput.id = "descInput";
+  descInput.className = "descInput";
   descInput.type = "text";
 
   const dateInputLabel = document.createElement("label");
@@ -91,11 +84,16 @@ showFormBtn.addEventListener("click", () => {
   dateInputLabel.setAttribute("for", "dateInput");
 
   const dateInput = document.createElement("input");
-  dateInput.id = "dateInput";
+  dateInput.className = "dateInput";
   dateInput.type = "date";
 
   const newTodoBtn = document.createElement("button");
   newTodoBtn.className = "sendNewTodoBtn";
+  newTodoBtn.innerText = "Add";
+
+  const backBtn = document.createElement("button");
+  backBtn.className = "sendNewTodoBtn";
+  backBtn.innerText = "Back";
 
   formDiv.append(
     titleInputLabel,
@@ -104,23 +102,45 @@ showFormBtn.addEventListener("click", () => {
     descInput,
     dateInputLabel,
     dateInput,
-    newTodoBtn
+    newTodoBtn,
+    backBtn
   );
   rootDiv.appendChild(formDiv);
 
   // === Add new todo === //
   newTodoBtn.addEventListener("click", () => {
-    const newTodoRef = push(ref(db, "todos"));
-    const todoId = newTodoRef.key;
+    if (titleInput.value && descInput.value && dateInput.value) {
+      console.log("input exist");
+      const newTodoRef = push(ref(db, "todos"));
+      const todoId = newTodoRef.key;
 
-    const newTodo = {
-      id: todoId,
-      title: titleInput.value,
-      description: descInput.value,
-      dueDate: dateInput.value,
-      isChecked: false,
-    };
+      const newTodo = {
+        id: todoId,
+        title: titleInput.value,
+        description: descInput.value,
+        dueDate: dateInput.value,
+        isChecked: false,
+      };
 
-    set(newTodoRef, newTodo);
+      set(newTodoRef, newTodo);
+    } else {
+      alert("Please fill in every field");
+      console.log("ingen input");
+    }
+  });
+
+  backBtn.addEventListener("click", () => {
+    get(postsRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          printTodosList(data);
+        } else {
+          console.log("Ingen data finns i databasen.");
+        }
+      })
+      .catch((error) => {
+        console.error("Fel vid hämtning av data:", error);
+      });
   });
 });
