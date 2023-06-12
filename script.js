@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue, set, push, get } from "firebase/database";
+import { getDatabase, ref, onValue, set, push, get, update } from "firebase/database";
 
 const rootDiv = document.getElementById("root");
 
@@ -38,6 +38,18 @@ function printTodosList(data) {
     const checkBox = document.createElement("input");
     checkBox.setAttribute("type", "checkbox");
     checkBox.setAttribute("class", "todo-checkbox");
+    checkBox.addEventListener("change", (event) => {
+      const isChecked = event.target.checked;
+      updateTodoStatus(todo.id, isChecked);
+    });
+    function updateTodoStatus(todoId, isChecked) {
+      const todoRef = ref(db, `todos/${todoId}`);
+      update(todoRef, { isChecked });
+    }
+
+    if (todo.isChecked){
+      checkBox.setAttribute("checked", "true")
+    } 
 
     const todoTitle = document.createElement("h3");
     todoTitle.innerText = todo.title;
