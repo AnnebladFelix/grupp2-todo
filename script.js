@@ -25,7 +25,7 @@ const app = initializeApp(firebaseConfig);
 let db = getDatabase();
 
 // Hämta en referens till kollektionen "posts"
-const postsRef = ref(db, "posts");
+const postsRef = ref(db, "todos");
 
 // Lyssna på ändringar i kollektionen "posts"
 onValue(postsRef, (snapshot) => {
@@ -35,7 +35,7 @@ onValue(postsRef, (snapshot) => {
   // Gör något med datan, t.ex. logga den
   console.log(data);
 
-  console.log(data.post);
+  console.log(data.todo);
 
-  console.log(data.post.postId);
+  console.log(data.todo.id);
 });
