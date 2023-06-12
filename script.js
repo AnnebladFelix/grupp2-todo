@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue } from "firebase/database";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+
+const rootDiv = document.getElementById("root");
 
 const firebaseConfig = {
   apiKey: "AIzaSyCQYXnE9tdxZDiYVVzO8vLlnkmsbUhoxvM",
@@ -14,28 +14,50 @@ const firebaseConfig = {
   appId: "1:173060457088:web:ed9f0413bbaa02a6dc1c65",
 };
 
-/* 
-onValue används för att lyssna på ändringar i den refererade kollektionen. När det sker en ändring kommer callback-funktionen att köras, och du kan hämta datan från snapshot.val() och utföra lämplig logik eller bearbetning med den.
-*/
-
-// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Hämta databasreferens med getDatabase()
 let db = getDatabase();
-
-// Hämta en referens till kollektionen "posts"
 const postsRef = ref(db, "todos");
 
-// Lyssna på ändringar i kollektionen "posts"
 onValue(postsRef, (snapshot) => {
-  // Hämta datan från snapshot
   const data = snapshot.val();
 
-  // Gör något med datan, t.ex. logga den
+  printTodosList(data);
+
   console.log(data);
-
   console.log(data.todo);
-
   console.log(data.todo.id);
 });
+
+// ==== Print every todo === //
+function printTodosList(data) {
+  rootDiv.innerHTML = "";
+
+  const todosWrapper = document.createElement("div");
+  todosWrapper.className = "todos-wrapper";
+
+  Object.values(data).forEach((todo) => {
+    const todoBox = document.createElement("div");
+    todoBox.className = "todo-box";
+
+    const checkBox = document.createElement("input");
+    checkBox.setAttribute("type", "checkbox");
+    checkBox.setAttribute("id", "todo-checkbox");
+
+    const todoTitle = document.createElement("h3");
+    todoTitle.innerText = todo.title;
+
+    const todoDesc = document.createElement("p");
+    todoDesc.innerText = todo.description;
+
+    const todoDate = document.createElement("p");
+    todoDate.innerText = todo.dueDate;
+
+    const todoTime = document.createElement("p");
+    todoTime.innerText = todo.dueTime;
+
+    todoBox.append(checkBox, todoTitle, todoDesc, todoDate, todoTime);
+
+    todosWrapper.appendChild(todoBox);
+  });
+  rootDiv.appendChild(todosWrapper);
+}
