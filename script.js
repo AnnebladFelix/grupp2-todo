@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue, set, push, get, update } from "firebase/database";
+import { getDatabase, ref, onValue, set, push, get, update, remove } from "firebase/database";
 
 const rootDiv = document.getElementById("root");
 
@@ -49,7 +49,13 @@ function printTodosList(data) {
 
     if (todo.isChecked){
       checkBox.setAttribute("checked", "true")
-    } 
+    }
+
+    function deleteTodo(todoId) {
+      const todoRef = ref(db, `todos/${todoId}`);
+      remove(todoRef)
+    }
+    
 
     const todoTitle = document.createElement("h3");
     todoTitle.innerText = todo.title;
@@ -60,7 +66,14 @@ function printTodosList(data) {
     const todoDate = document.createElement("p");
     todoDate.innerText = todo.dueDate;
 
-    todoBox.append(checkBox, todoTitle, todoDesc, todoDate);
+    const deleteButton = document.createElement("button");
+    deleteButton.innerText = "Delete";
+
+    deleteButton.addEventListener("click", () => {
+      deleteTodo(todo.id);
+    })
+
+    todoBox.append(checkBox, todoTitle, todoDesc, todoDate, deleteButton);
 
     todosWrapper.appendChild(todoBox);
   });
