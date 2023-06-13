@@ -1,3 +1,4 @@
+import updateTodo from "./updateTodo.js";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, set, push, get, update, remove } from "firebase/database";
 
@@ -25,7 +26,7 @@ onValue(postsRef, (snapshot) => {
 });
 
 // ==== Print every todo === //
-function printTodosList(data) {
+export default function printTodosList(data) {
   rootDiv.innerHTML = "";
 
   const todosWrapper = document.createElement("div");
@@ -55,7 +56,6 @@ function printTodosList(data) {
       const todoRef = ref(db, `todos/${todoId}`);
       remove(todoRef)
     }
-    
 
     const todoTitle = document.createElement("h3");
     todoTitle.innerText = todo.title;
@@ -73,7 +73,13 @@ function printTodosList(data) {
       deleteTodo(todo.id);
     })
 
-    todoBox.append(checkBox, todoTitle, todoDesc, todoDate, deleteButton);
+    const editBtn = document.createElement("button");
+    editBtn.innerText = "Edit todo";
+    editBtn.addEventListener("click", ()=>{
+      updateTodo(todo);
+    })
+
+    todoBox.append(checkBox, todoTitle, todoDesc, todoDate, deleteButton, editBtn);
 
     todosWrapper.appendChild(todoBox);
   });
@@ -113,11 +119,11 @@ showFormBtn.addEventListener("click", () => {
   dateInput.type = "date";
 
   const newTodoBtn = document.createElement("button");
-  newTodoBtn.className = "sendNewTodoBtn";
+  newTodoBtn.className = "NewTodoBtn";
   newTodoBtn.innerText = "Add";
 
   const backBtn = document.createElement("button");
-  backBtn.className = "sendNewTodoBtn";
+  backBtn.className = "backTodoBtn";
   backBtn.innerText = "Back";
 
   formDiv.append(
