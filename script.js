@@ -1,7 +1,13 @@
 import printTodosList from "./printTodos.js";
 import newTodoForm from "./newTodoForm.js";
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, onValue } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  onValue,
+  query,
+  orderByChild,
+} from "firebase/database";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCQYXnE9tdxZDiYVVzO8vLlnkmsbUhoxvM",
@@ -16,12 +22,13 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 let db = getDatabase();
-const postsRef = ref(db, "todos");
+const postsRef = query(ref(db, "todos"), orderByChild("dueDate"));
 
 onValue(postsRef, (snapshot) => {
   const data = snapshot.val();
+  const sortedData = sortByDate(data);
 
-  printTodosList(data);
+  printTodosList(sortedData);
 });
 
 // === Print Todo Form == //
@@ -30,3 +37,15 @@ const showFormBtn = document.getElementById("show-form-btn");
 showFormBtn.addEventListener("click", () => {
   newTodoForm();
 });
+
+/*Returns a array of database 
+in sorted assending order by date*/
+function sortByDate(data) {
+  const sortedData = Object.values(data).sort((a, b) => {
+    const dateA = new Date(a.dueDate);
+    const dateB = new Date(b.dueDate);
+    return dateA - dateB;
+  });
+
+  return sortedData;
+}
