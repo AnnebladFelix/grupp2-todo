@@ -57,6 +57,19 @@ export default function printTodosList(data) {
   
       const todoDate = document.createElement("p");
       todoDate.innerText = todo.dueDate;
+
+      const setDate = new Date(todo.dueDate)
+      const currentDate = new Date();
+      currentDate.setHours(2, 0, 0, 0);
+
+
+      if (currentDate > setDate) {
+        todoDate.style.color = "red";
+      } else if (currentDate.toDateString() === setDate.toDateString()) {
+        todoDate.style.color = "orange";
+      } else {
+        todoDate.style.color = "green";
+      }
   
       const deleteButton = document.createElement("button");
       deleteButton.innerText = "Delete";
