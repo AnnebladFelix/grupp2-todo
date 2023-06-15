@@ -1,7 +1,8 @@
-import printTodosList from "./script.js"
+import printTodosList from "./printTodos.js"
+
 
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, update } from "firebase/database";
+import { getDatabase, ref, get, update} from "firebase/database";
 
 const rootDiv = document.getElementById("root");
 
@@ -19,6 +20,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 let db = getDatabase();
 const postsRef = ref(db, "todos");
+
 
 export default function updateTodo(todo){
     rootDiv.innerHTML = "";
@@ -98,20 +100,22 @@ export default function updateTodo(todo){
           .catch((error) => {
             console.error('Error updating post:', error);
           });
-      });
 
-    backBtn.addEventListener("click", () => {
-        get(postsRef)
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              const data = snapshot.val();
-              printTodosList(data);
-            } else {
-              console.log("Ingen data finns i databasen.");
-            }
-        })
-        .catch((error) => {
-            console.error("Fel vid hämtning av data:", error);
-        });
-    });
+      });
+  });
+
+  backBtn.addEventListener("click", () => {
+    get(postsRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const data = snapshot.val();
+          printTodosList(data);
+        } else {
+          console.log("Ingen data finns i databasen.");
+        }
+      })
+      .catch((error) => {
+        console.error("Fel vid hämtning av data:", error);
+      });
+  });
 }
