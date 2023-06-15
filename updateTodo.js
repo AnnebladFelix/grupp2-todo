@@ -42,9 +42,8 @@ export default function updateTodo(todo){
     descInputLabel.innerText = "Description: ";
     descInputLabel.setAttribute("for", "descInput");
   
-    const descInput = document.createElement("input");
+    const descInput = document.createElement("textarea");
     descInput.className = "descInput";
-    descInput.type = "text";
     descInput.value = todo.description;
     descInput.id = "desc-input";
   
@@ -102,7 +101,6 @@ export default function updateTodo(todo){
           });
 
       });
-  });
 
   backBtn.addEventListener("click", () => {
     get(postsRef)

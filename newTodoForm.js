@@ -38,10 +38,9 @@ export default function newTodoForm(){
     descInputLabel.innerText = "Description: ";
     descInputLabel.setAttribute("for", "descInput");
   
-    const descInput = document.createElement("input");
+    const descInput = document.createElement("textarea");
     descInput.className = "descInput";
     descInput.id = "desc-input";
-    descInput.type = "text";
   
     const dateInputLabel = document.createElement("label");
     dateInputLabel.innerText = "Due date: ";
