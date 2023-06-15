@@ -2,6 +2,7 @@ import printTodosList from "./printTodos.js";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, push, get, } from "firebase/database";
 
+
 const rootDiv = document.getElementById("root");
 
 const firebaseConfig = {
@@ -23,13 +24,14 @@ export default function newTodoForm(){
     rootDiv.innerHTML = "";
 
     const formDiv = document.createElement("div");
-  
+    formDiv.id = "form-div";
     const titleInputLabel = document.createElement("label");
     titleInputLabel.innerText = "Titel: ";
     titleInputLabel.setAttribute("for", "titleInput");
   
     const titleInput = document.createElement("input");
     titleInput.className = "titleInput";
+    titleInput.id = "titel-Input";
     titleInput.type = "text";
   
     const descInputLabel = document.createElement("label");
@@ -38,6 +40,7 @@ export default function newTodoForm(){
   
     const descInput = document.createElement("input");
     descInput.className = "descInput";
+    descInput.id = "desc-input";
     descInput.type = "text";
   
     const dateInputLabel = document.createElement("label");
@@ -46,15 +49,18 @@ export default function newTodoForm(){
   
     const dateInput = document.createElement("input");
     dateInput.className = "dateInput";
+    dateInput.id = "date-input";
     dateInput.type = "date";
   
     const newTodoBtn = document.createElement("button");
     newTodoBtn.className = "NewTodoBtn";
     newTodoBtn.innerText = "Add";
+    newTodoBtn.id = "new-todo";
   
     const backBtn = document.createElement("button");
     backBtn.className = "backTodoBtn";
     backBtn.innerText = "Back";
+    backBtn.id = "back-btn";
   
     formDiv.append(
       titleInputLabel,

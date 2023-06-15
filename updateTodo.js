@@ -24,7 +24,7 @@ export default function updateTodo(todo){
     rootDiv.innerHTML = "";
 
     const formDiv = document.createElement("div");
-  
+    formDiv.id = "form-div";
     const titleInputLabel = document.createElement("label");
     titleInputLabel.innerText = "Titel: ";
     titleInputLabel.setAttribute("for", "titleInput");
@@ -33,6 +33,7 @@ export default function updateTodo(todo){
     titleInput.className = "titleInput";
     titleInput.type = "text";
     titleInput.value = todo.title
+    titleInput.id = "titel-Input";
     
 
     const descInputLabel = document.createElement("label");
@@ -43,6 +44,7 @@ export default function updateTodo(todo){
     descInput.className = "descInput";
     descInput.type = "text";
     descInput.value = todo.description;
+    descInput.id = "desc-input";
   
     const dateInputLabel = document.createElement("label");
     dateInputLabel.innerText = "Due date: ";
@@ -52,14 +54,17 @@ export default function updateTodo(todo){
     dateInput.className = "dateInput";
     dateInput.type = "date";
     dateInput.value = todo.dueDate;
+    dateInput.id = "date-input";
   
     const saveTodoBtn = document.createElement("button");
     saveTodoBtn.className = "saveTodoBtn";
     saveTodoBtn.innerText = "Save";
+    saveTodoBtn.id = "new-todo";
   
     const backBtn = document.createElement("button");
     backBtn.className = "backTodoBtn";
     backBtn.innerText = "Back";
+    backBtn.id = "back-btn";
   
     formDiv.append(
       titleInputLabel,
