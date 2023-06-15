@@ -21,77 +21,86 @@ const app = initializeApp(firebaseConfig);
 let db = getDatabase();
 const postsRef = ref(db, "todos");
 
-export default function updateTodo(todo) {
-  rootDiv.innerHTML = "";
 
-  const formDiv = document.createElement("div");
+export default function updateTodo(todo){
+    rootDiv.innerHTML = "";
 
-  const titleInputLabel = document.createElement("label");
-  titleInputLabel.innerText = "Titel: ";
-  titleInputLabel.setAttribute("for", "titleInput");
+    const formDiv = document.createElement("div");
+    formDiv.id = "form-div";
+    const titleInputLabel = document.createElement("label");
+    titleInputLabel.innerText = "Titel: ";
+    titleInputLabel.setAttribute("for", "titleInput");
+  
+    const titleInput = document.createElement("input");
+    titleInput.className = "titleInput";
+    titleInput.type = "text";
+    titleInput.value = todo.title
+    titleInput.id = "titel-Input";
+    
 
-  const titleInput = document.createElement("input");
-  titleInput.className = "titleInput";
-  titleInput.type = "text";
-  titleInput.value = todo.title;
+    const descInputLabel = document.createElement("label");
+    descInputLabel.innerText = "Description: ";
+    descInputLabel.setAttribute("for", "descInput");
+  
+    const descInput = document.createElement("input");
+    descInput.className = "descInput";
+    descInput.type = "text";
+    descInput.value = todo.description;
+    descInput.id = "desc-input";
+  
+    const dateInputLabel = document.createElement("label");
+    dateInputLabel.innerText = "Due date: ";
+    dateInputLabel.setAttribute("for", "dateInput");
+  
+    const dateInput = document.createElement("input");
+    dateInput.className = "dateInput";
+    dateInput.type = "date";
+    dateInput.value = todo.dueDate;
+    dateInput.id = "date-input";
+  
+    const saveTodoBtn = document.createElement("button");
+    saveTodoBtn.className = "saveTodoBtn";
+    saveTodoBtn.innerText = "Save";
+    saveTodoBtn.id = "new-todo";
+  
+    const backBtn = document.createElement("button");
+    backBtn.className = "backTodoBtn";
+    backBtn.innerText = "Back";
+    backBtn.id = "back-btn";
+  
+    formDiv.append(
+      titleInputLabel,
+      titleInput,
+      descInputLabel,
+      descInput,
+      dateInputLabel,
+      dateInput,
+      saveTodoBtn,
+      backBtn
+    );
+    rootDiv.appendChild(formDiv);
 
-  const descInputLabel = document.createElement("label");
-  descInputLabel.innerText = "Description: ";
-  descInputLabel.setAttribute("for", "descInput");
+    saveTodoBtn.addEventListener("click", () => {
+        const updates = {};
+      
+        const postData = {
+          isChecked: todo.isChecked,
+          id: todo.id,
+          title: titleInput.value,
+          description: descInput.value,
+          dueDate: dateInput.value
+        };
+      
+        updates[`todos/${todo.id}`] = postData;
+      
+        update(ref(db), updates)
+          .then(() => {
+            console.log('Post updated successfully');
+          })
+          .catch((error) => {
+            console.error('Error updating post:', error);
+          });
 
-  const descInput = document.createElement("input");
-  descInput.className = "descInput";
-  descInput.type = "text";
-  descInput.value = todo.description;
-
-  const dateInputLabel = document.createElement("label");
-  dateInputLabel.innerText = "Due date: ";
-  dateInputLabel.setAttribute("for", "dateInput");
-
-  const dateInput = document.createElement("input");
-  dateInput.className = "dateInput";
-  dateInput.type = "date";
-  dateInput.value = todo.dueDate;
-
-  const saveTodoBtn = document.createElement("button");
-  saveTodoBtn.className = "saveTodoBtn";
-  saveTodoBtn.innerText = "Save";
-
-  const backBtn = document.createElement("button");
-  backBtn.className = "backTodoBtn";
-  backBtn.innerText = "Back";
-
-  formDiv.append(
-    titleInputLabel,
-    titleInput,
-    descInputLabel,
-    descInput,
-    dateInputLabel,
-    dateInput,
-    saveTodoBtn,
-    backBtn
-  );
-  rootDiv.appendChild(formDiv);
-
-  saveTodoBtn.addEventListener("click", () => {
-    const updates = {};
-
-    const postData = {
-      isChecked: todo.isChecked,
-      id: todo.id,
-      title: titleInput.value,
-      description: descInput.value,
-      dueDate: dateInput.value,
-    };
-
-    updates[`todos/${todo.id}`] = postData;
-
-    update(ref(db), updates)
-      .then(() => {
-        console.log("Post updated successfully");
-      })
-      .catch((error) => {
-        console.error("Error updating post:", error);
       });
   });
 

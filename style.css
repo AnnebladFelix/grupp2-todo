@@ -1,3 +1,63 @@
+
+#form-div {
+    display:flex;
+    flex-direction: column;
+    row-gap: 15px;
+    width: 25%;
+    min-width: 150px;
+    align-items:center;
+    justify-content: center;
+    background: #c2cbea;
+    padding: 50px;
+    text-align: center;
+    border-radius: 10px;
+    margin: auto;
+    font-size:x-large;
+    
+}
+
+#titel-Input {
+    width: 80%;
+    padding-bottom: 3%;
+}
+
+#desc-input {
+    width: 80%;
+    padding-bottom: 50%;
+}
+
+#date-input {
+    width: 30%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    text-align: center;
+    font-size: large;
+}
+
+#new-todo {
+    width: 40%;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: large;
+    cursor: pointer;
+}
+
+#new-todo:hover {
+    transform: scale(1.1);
+}
+
+#back-btn {
+    width: 40%;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: large;
+    cursor: pointer;
+}
+
+#back-btn:hover {
+    transform: scale(1.1);
+}
+
 :root {
   --main-padding: 0 10px;
 }
@@ -165,4 +225,5 @@ button:hover {
     font-size: 3.3rem;
   }
 }
+
 
