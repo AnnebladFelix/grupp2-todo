@@ -1,9 +1,7 @@
-
 #form-div {
     display:flex;
     flex-direction: column;
     row-gap: 15px;
-    width: 25%;
     min-width: 150px;
     align-items:center;
     justify-content: center;
@@ -24,38 +22,14 @@
 #desc-input {
     width: 80%;
     padding-bottom: 50%;
+    word-break: break-all;
 }
 
 #date-input {
-    width: 30%;
     padding-top: 2%;
     padding-bottom: 2%;
     text-align: center;
     font-size: large;
-}
-
-#new-todo {
-    width: 40%;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: large;
-    cursor: pointer;
-}
-
-#new-todo:hover {
-    transform: scale(1.1);
-}
-
-#back-btn {
-    width: 40%;
-    border-radius: 5px;
-    padding: 5px;
-    font-size: large;
-    cursor: pointer;
-}
-
-#back-btn:hover {
-    transform: scale(1.1);
 }
 
 :root {
@@ -176,11 +150,20 @@ input[type="checkbox"]:checked {
 }
 
 /* BUTTONS */
+#new-todo {
+    width: 40%;
+    cursor: pointer;
+}
+
+#back-btn {
+    width: 40%;
+    cursor: pointer;
+}
+
 button {
   background-color: #c2fbd7;
   border-radius: 100px;
   box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
-  /* color: green; */
   cursor: pointer;
   display: inline-block;
   font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
@@ -188,6 +171,7 @@ button {
   text-align: center;
   text-decoration: none;
   transition: all 250ms;
+  border-radius: 5px;
   border: 0;
   font-size: 16px;
   user-select: none;
@@ -198,19 +182,18 @@ button {
 
 button:hover {
   box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
-  transform: scale(1.05) rotate(-1deg);
+  transform: scale(1.05);
 }
 
 .delete-btn{
   background-color: #fbc2c2;
   box-shadow: rgba(187, 44, 44, 0.2) 0 -25px 18px -14px inset,rgba(187, 44, 44, 0.15) 0 1px 2px,rgba(187, 44, 44, 0.15) 0 2px 4px,rgba(187, 44, 44, 0.15) 0 4px 8px,rgba(187, 44, 44, 0.15) 0 8px 16px,rgba(187, 44, 44, 0.15) 0 16px 32px;
-  /* color: rgb(128, 0, 0); */
   margin-right: 10px;
 }
 
 .delete-btn:hover{
     box-shadow: rgba(187, 44, 44, 0.35) 0 -25px 18px -14px inset,rgba(187, 44, 44, 0.25) 0 1px 2px,rgba(187, 44, 44, 0.25) 0 2px 4px,rgba(187, 44, 44, 0.25) 0 4px 8px,rgba(187, 44, 44, 0.25) 0 8px 16px,rgba(187, 44, 44, 0.25) 0 16px 32px;
-    transform: scale(1.05) rotate(-1deg);
+    transform: scale(1.05);
 }
 
 /* For bigger screens than mobile and tablets */
