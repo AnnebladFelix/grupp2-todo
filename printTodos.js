@@ -30,7 +30,7 @@ export default function printTodosList(data) {
   
       const checkBox = document.createElement("input");
       checkBox.setAttribute("type", "checkbox");
-      checkBox.setAttribute("class", "todo-checkbox");
+      checkBox.className = "todo-checkbox";
       checkBox.addEventListener("change", (event) => {
         const isChecked = event.target.checked;
         updateTodoStatus(todo.id, isChecked);
@@ -42,7 +42,10 @@ export default function printTodosList(data) {
   
       if (todo.isChecked){
         checkBox.setAttribute("checked", "true")
-      }
+        todoBox.classList = 'checked';
+      }else {
+            todoBox.classList.remove('checked');
+        }
   
       function deleteTodo(todoId) {
         const todoRef = ref(db, `todos/${todoId}`);
@@ -51,12 +54,15 @@ export default function printTodosList(data) {
   
       const todoTitle = document.createElement("h3");
       todoTitle.innerText = todo.title;
+      todoTitle.className = "todo-titel"
   
       const todoDesc = document.createElement("p");
       todoDesc.innerText = todo.description;
-  
+      todoDesc.className = "todo-desc";
+
       const todoDate = document.createElement("p");
       todoDate.innerText = todo.dueDate;
+      todoDate.className = "todo-date";
 
       const setDate = new Date(todo.dueDate)
       const currentDate = new Date();
@@ -71,20 +77,33 @@ export default function printTodosList(data) {
         todoDate.style.color = "green";
       }
   
-      const deleteButton = document.createElement("button");
-      deleteButton.innerText = "Delete";
-  
-      deleteButton.addEventListener("click", () => {
+      const deleteBtn = document.createElement("button");
+      deleteBtn.innerText = "Delete";
+      deleteBtn.className = "delete-btn"
+
+      deleteBtn.addEventListener("click", () => {
         deleteTodo(todo.id);
       })
   
       const editBtn = document.createElement("button");
-      editBtn.innerText = "Edit todo";
+      editBtn.innerText = "Edit";
       editBtn.addEventListener("click", ()=>{
         updateTodo(todo);
       })
-  
-      todoBox.append(checkBox, todoTitle, todoDesc, todoDate, deleteButton, editBtn);
+      editBtn.className = "edit-btn"
+
+      const checkBoxDiv = document.createElement('div')
+      checkBoxDiv.className = 'check-box-div'
+      const midDiv = document.createElement('div')
+      midDiv.className = 'mid-div'
+      
+      const btnDiv = document.createElement('div')
+      btnDiv.className = 'btn-div'
+
+      checkBoxDiv.appendChild(checkBox)
+      midDiv.append(todoDate, todoDesc, checkBoxDiv)
+      btnDiv.append(deleteBtn, editBtn)
+      todoBox.append(todoTitle, midDiv, btnDiv);
   
       todosWrapper.appendChild(todoBox);
     });

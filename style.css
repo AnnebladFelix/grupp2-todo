@@ -1,0 +1,107 @@
+.todo-wrapper{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10%;
+}
+.todo-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90%;
+    background-color: #c2cbea;
+    margin: 10px;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.checked{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90%;
+    background-color: #8dd8a2;
+    margin: 10px;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+input[type="checkbox"] {
+    transform: scale(1.5);
+    
+  }
+input[type="checkbox"]:checked {
+    transform: scale(3);
+    accent-color: #8dd8a2;
+    
+  }
+.todo-titel::first-letter{
+    text-transform: capitalize;
+}
+
+.mid-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.btn-div{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 50%;
+    
+}
+.todo-date{
+    width: 33%;
+}
+.todo-desc{
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    width: 33%;
+}
+.check-box-div{
+    display: flex;
+    justify-content: center;
+    width: 33%;
+    height: 100%;
+}
+
+/* BUTTONS */
+button {
+  background-color: #c2fbd7;
+  border-radius: 100px;
+  box-shadow: rgba(44, 187, 99, .2) 0 -25px 18px -14px inset,rgba(44, 187, 99, .15) 0 1px 2px,rgba(44, 187, 99, .15) 0 2px 4px,rgba(44, 187, 99, .15) 0 4px 8px,rgba(44, 187, 99, .15) 0 8px 16px,rgba(44, 187, 99, .15) 0 16px 32px;
+  /* color: green; */
+  cursor: pointer;
+  display: inline-block;
+  font-family: CerebriSans-Regular,-apple-system,system-ui,Roboto,sans-serif;
+  padding: 5px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 250ms;
+  border: 0;
+  font-size: 16px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  width: 150%;
+}
+button:hover {
+  box-shadow: rgba(44,187,99,.35) 0 -25px 18px -14px inset,rgba(44,187,99,.25) 0 1px 2px,rgba(44,187,99,.25) 0 2px 4px,rgba(44,187,99,.25) 0 4px 8px,rgba(44,187,99,.25) 0 8px 16px,rgba(44,187,99,.25) 0 16px 32px;
+  transform: scale(1.05) rotate(-1deg);
+}
+.delete-btn{
+  background-color: #fbc2c2;
+  box-shadow: rgba(187, 44, 44, 0.2) 0 -25px 18px -14px inset,rgba(187, 44, 44, 0.15) 0 1px 2px,rgba(187, 44, 44, 0.15) 0 2px 4px,rgba(187, 44, 44, 0.15) 0 4px 8px,rgba(187, 44, 44, 0.15) 0 8px 16px,rgba(187, 44, 44, 0.15) 0 16px 32px;
+  /* color: rgb(128, 0, 0); */
+  margin-right: 10px;
+}
+
+.delete-btn:hover{
+    box-shadow: rgba(187, 44, 44, 0.35) 0 -25px 18px -14px inset,rgba(187, 44, 44, 0.25) 0 1px 2px,rgba(187, 44, 44, 0.25) 0 2px 4px,rgba(187, 44, 44, 0.25) 0 4px 8px,rgba(187, 44, 44, 0.25) 0 8px 16px,rgba(187, 44, 44, 0.25) 0 16px 32px;
+    transform: scale(1.05) rotate(-1deg);
+}

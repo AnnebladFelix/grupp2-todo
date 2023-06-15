@@ -1,7 +1,7 @@
-import printTodosList from "./script.js"
+import printTodosList from "./printTodos.js"
 
 import { initializeApp } from "firebase/app";
-import { getDatabase, ref, get, update } from "firebase/database";
+import { getDatabase, ref, get, update} from "firebase/database";
 
 const rootDiv = document.getElementById("root");
 
