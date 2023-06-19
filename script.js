@@ -1,5 +1,6 @@
 import printTodosList from "./printTodos.js";
 import newTodoForm from "./newTodoForm.js";
+import filter from "./knapp.js";
 import { initializeApp } from "firebase/app";
 import {
   getDatabase,
@@ -26,9 +27,10 @@ const postsRef = query(ref(db, "todos"), orderByChild("dueDate"));
 
 onValue(postsRef, (snapshot) => {
   const data = snapshot.val();
-  const sortedData = sortByDate(data);
+  // const sortedData = sortByDate(data);
 
-  printTodosList(sortedData);
+  printTodosList(data);
+  filter(data);
 });
 
 // === Print Todo Form == //
@@ -40,6 +42,7 @@ showFormBtn.addEventListener("click", () => {
 
 /*Returns a array of database 
 in sorted assending order by date*/
+/*
 function sortByDate(data) {
   const sortedData = Object.values(data).sort((a, b) => {
     const dateA = new Date(a.dueDate);
@@ -49,3 +52,4 @@ function sortByDate(data) {
 
   return sortedData;
 }
+*/
