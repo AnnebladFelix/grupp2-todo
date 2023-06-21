@@ -1,4 +1,5 @@
 import printTodosList from "./printTodos.js";
+
 export default function filter(data) {
   const button = document.getElementById("filter-btn");
   button.innerHTML = "";
@@ -18,7 +19,6 @@ export default function filter(data) {
     });
 
     printTodosList(sortedData);
-    // Printa alla todos
   }
   button.appendChild(filterBtn);
 }
