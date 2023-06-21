@@ -27,8 +27,6 @@ const postsRef = query(ref(db, "todos"), orderByChild("dueDate"));
 
 onValue(postsRef, (snapshot) => {
   const data = snapshot.val();
-  // const sortedData = sortByDate(data);
-
   printTodosList(data);
   filter(data);
 });
@@ -39,17 +37,3 @@ const showFormBtn = document.getElementById("show-form-btn");
 showFormBtn.addEventListener("click", () => {
   newTodoForm();
 });
-
-/*Returns a array of database 
-in sorted assending order by date*/
-/*
-function sortByDate(data) {
-  const sortedData = Object.values(data).sort((a, b) => {
-    const dateA = new Date(a.dueDate);
-    const dateB = new Date(b.dueDate);
-    return dateA - dateB;
-  });
-
-  return sortedData;
-}
-*/

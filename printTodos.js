@@ -31,10 +31,12 @@ export default function printTodosList(data) {
     const checkBox = document.createElement("input");
     checkBox.setAttribute("type", "checkbox");
     checkBox.className = "todo-checkbox";
+
     checkBox.addEventListener("change", (event) => {
       const isChecked = event.target.checked;
       updateTodoStatus(todo.id, isChecked);
     });
+
     function updateTodoStatus(todoId, isChecked) {
       const todoRef = ref(db, `todos/${todoId}`);
       update(todoRef, { isChecked });
@@ -84,10 +86,10 @@ export default function printTodosList(data) {
       const response = confirm("Are you sure you want to delete todo task ?");
 
       if (response) {
-        alert("Ok was pressed");
+        alert("Todo was deleted");
         deleteTodo(todo.id);
       } else {
-        alert("Cancel was pressed");
+        alert("Deletion was canceled");
       }
     });
 
